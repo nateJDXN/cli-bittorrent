@@ -39,15 +39,13 @@ public class Main {
 
       int length = Integer.parseInt(bencodedString.substring(0, firstColonIndex));
 
-      // handle integers
-      if (bencodedString.charAt(firstColonIndex + 1) == 'i' && bencodedString.charAt(bencodedString.length() - 1) == 'e') {
-        return bencodedString.substring(firstColonIndex+2, firstColonIndex+length);
-      }
-      else {
-        return bencodedString.substring(firstColonIndex+1, firstColonIndex+1+length);
-      }
+      return bencodedString.substring(firstColonIndex+1, firstColonIndex+1+length);
+
+    } else if (bencodedString.charAt(0) == 'i' && bencodedString.charAt(bencodedString.length() - 1) == 'e'){
+      return bencodedString.substring(1, bencodedString.length() - 1);
+      
     } else {
-      throw new RuntimeException("Only strings are supported at the moment");
+      throw new RuntimeException("Invalid String");
     }
   }
 }
