@@ -36,11 +36,18 @@ public class Main {
           break;
         }
       }
+
       int length = Integer.parseInt(bencodedString.substring(0, firstColonIndex));
-      return bencodedString.substring(firstColonIndex+1, firstColonIndex+1+length);
+
+      // handle integers
+      if (bencodedString.charAt(firstColonIndex + 1) == 'i' && bencodedString.charAt(bencodedString.length() - 1) == 'e') {
+        return bencodedString.substring(firstColonIndex+2, firstColonIndex+length);
+      }
+      else {
+        return bencodedString.substring(firstColonIndex+1, firstColonIndex+1+length);
+      }
     } else {
       throw new RuntimeException("Only strings are supported at the moment");
     }
   }
-  
 }
