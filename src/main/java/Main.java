@@ -12,7 +12,7 @@ public class Main {
     if("decode".equals(command)) {
       //  Uncomment this block to pass the first stage
        String bencodedValue = args[1];
-       String decoded;
+       Object decoded;
        try {
          decoded = decodeBencode(bencodedValue);
        } catch(RuntimeException e) {
@@ -27,7 +27,7 @@ public class Main {
 
   }
 
-  static String decodeBencode(String bencodedString) {
+  static Object decodeBencode(String bencodedString) {
     if (Character.isDigit(bencodedString.charAt(0))) {
       int firstColonIndex = 0;
       for(int i = 0; i < bencodedString.length(); i++) { 
@@ -42,7 +42,7 @@ public class Main {
       return bencodedString.substring(firstColonIndex+1, firstColonIndex+1+length);
 
     } else if (bencodedString.charAt(0) == 'i' && bencodedString.charAt(bencodedString.length() - 1) == 'e'){
-      return bencodedString.substring(1, bencodedString.length() - 1);
+      return Long.parseLong(bencodedString.substring(1, bencodedString.length() - 1));
       
     } else {
       throw new RuntimeException("Invalid String");
